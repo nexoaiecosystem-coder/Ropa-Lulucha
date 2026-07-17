@@ -15,6 +15,10 @@ export const siteConfig = {
   city: "Montevideo, Uruguay",
   currency: "UYU",
   locale: "es-UY",
+  // TODO: reemplazar por el dominio real una vez que esté comprado y conectado.
+  siteUrl: "https://tu-dominio.com",
+  // TODO: reemplazar por el email real de contacto del negocio.
+  contactEmail: "hola@tu-dominio.com",
 };
 
 export function formatPrice(amount: number) {

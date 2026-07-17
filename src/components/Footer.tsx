@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { buildInstagramLink, buildWhatsAppLink, siteConfig } from "@/lib/site-config";
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
         <p>
           © {new Date().getFullYear()} {siteConfig.brandName} · {siteConfig.city}
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <a
             href={buildWhatsAppLink("Hola! Tengo una consulta.")}
             target="_blank"
@@ -24,6 +25,15 @@ export function Footer() {
           >
             Instagram
           </a>
+          <Link href="/envios-y-pagos" className="hover:text-zinc-900 dark:hover:text-zinc-50">
+            Envíos y pagos
+          </Link>
+          <Link href="/terminos" className="hover:text-zinc-900 dark:hover:text-zinc-50">
+            Términos
+          </Link>
+          <Link href="/privacidad" className="hover:text-zinc-900 dark:hover:text-zinc-50">
+            Privacidad
+          </Link>
         </div>
       </div>
     </footer>
