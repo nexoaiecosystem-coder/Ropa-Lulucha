@@ -62,7 +62,19 @@ export function Header() {
           ))}
         </div>
 
-        <MobileNav links={[...shopLinks, ...infoLinks]} />
+        <MobileNav
+          sections={[
+            { title: "Comprar", items: shopLinks },
+            {
+              title: "Categorías",
+              items: categories.map((category) => ({
+                href: `/catalogo?categoria=${encodeURIComponent(category)}`,
+                label: category,
+              })),
+            },
+            { title: "Información", items: infoLinks },
+          ]}
+        />
       </div>
     </header>
   );

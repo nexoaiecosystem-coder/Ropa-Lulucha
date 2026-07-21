@@ -36,13 +36,13 @@ export default async function ProductPage({
   )}).`;
 
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 md:grid-cols-2">
+    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-8 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-2">
       <ProductImagePlaceholder product={product} className="rounded-2xl" />
       <div className="flex flex-col gap-4">
         <span className="text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           {product.category} · {product.gender}
         </span>
-        <h1 className="text-3xl font-bold tracking-tight">{product.name}</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{product.name}</h1>
         <p className="flex items-center gap-3 text-2xl font-semibold">
           {formatPrice(product.price)}
           {product.originalPrice && (
@@ -78,7 +78,7 @@ export default async function ProductPage({
           </p>
         </div>
 
-        <WhatsAppButton message={message} className="mt-4 w-fit">
+        <WhatsAppButton message={message} className="mt-4 w-full sm:w-fit">
           Comprar por WhatsApp
         </WhatsAppButton>
       </div>

@@ -3,11 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export function MobileNav({
-  links,
-}: {
-  links: { href: string; label: string }[];
-}) {
+type NavItem = { href: string; label: string };
+type NavSection = { title?: string; items: NavItem[] };
+
+export function MobileNav({ sections }: { sections: NavSection[] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -31,20 +30,31 @@ export function MobileNav({
         )}
       </button>
       {open && (
-        <nav className="absolute inset-x-0 top-full border-b border-white/10 bg-brand-dark px-6 py-4">
-          <ul className="flex flex-col gap-4 text-sm font-medium">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block text-white/70 hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              </li>
+        <nav className="absolute inset-x-0 top-full max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-white/10 bg-brand-dark px-6 py-4">
+          <div className="flex flex-col gap-6">
+            {sections.map((section, index) => (
+              <div key={section.title ?? index}>
+                {section.title && (
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-white/40">
+                    {section.title}
+                  </h3>
+                )}
+                <ul className="flex flex-col gap-3 text-sm font-medium">
+                  {section.items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        className="block text-white/80 hover:text-white"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </nav>
       )}
     </div>
