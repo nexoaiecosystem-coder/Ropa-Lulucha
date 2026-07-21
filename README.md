@@ -1,10 +1,16 @@
-# Tienda online (nombre de marca por definir)
+# Lulucha — tienda online
 
-Sitio de marca + catálogo para la venta de ropa y calzado originales (Nike,
-Adidas, Jordan, etc.) en Uruguay. Es la primera etapa técnica del proyecto:
-una landing con catálogo y checkout vía WhatsApp, pensada para validar el
+Sitio de marca + catálogo para Lulucha, venta de ropa streetwear y
+championes en Uruguay. Es la primera etapa técnica del proyecto: una
+landing con catálogo y checkout vía WhatsApp, pensada para validar el
 negocio antes de invertir en una tienda online completa con carrito y pagos
 integrados.
+
+Nota: en paralelo existe otra versión del sitio, armada por fuera de esta
+sesión (más avanzada en el diseño de catálogo). Este repo se actualizó para
+adoptar el nombre y la estética de esa versión (categorías, colores,
+productos de ejemplo) como referencia, pero el código es propio — falta
+decidir con cuál de las dos quedarse o cómo combinarlas.
 
 ## Cómo correr el proyecto
 
@@ -20,9 +26,9 @@ Abrir [http://localhost:3000](http://localhost:3000).
 Todo lo marcado con `TODO` en el código es un dato de ejemplo que hay que
 reemplazar antes de publicar el sitio:
 
-- **`src/lib/site-config.ts`**: nombre de la marca, número de WhatsApp,
-  usuario de Instagram. Es el único archivo que hay que tocar para que el
-  nombre de la marca se actualice en todo el sitio.
+- **`src/lib/site-config.ts`**: número de WhatsApp, usuario de Instagram,
+  y el flag `hasLocalPickup` (el mensaje de retiro en Pocitos está
+  desactivado hasta confirmar si es real).
 - **`src/lib/products.ts`**: catálogo de ejemplo (productos, precios,
   talles). Reemplazar por el stock real cuando esté disponible.
 - **`src/components/ProductImagePlaceholder.tsx`**: hoy los productos
@@ -36,8 +42,12 @@ reemplazar antes de publicar el sitio:
 ## Cómo está armado
 
 - **Next.js (App Router) + TypeScript + Tailwind CSS**.
-- `/` — landing con propuesta de valor y productos destacados.
-- `/catalogo` — grilla de productos con filtro por categoría.
+- Banner de anuncios (`src/components/AnnouncementBar.tsx`) y header oscuro
+  con navegación por género/colección y menú de categorías
+  (`src/components/Header.tsx`).
+- `/` — landing con nuevos drops y más vendidos.
+- `/catalogo` — grilla de productos con sidebar de filtros (género,
+  categoría, talle, colección) combinables por URL.
 - `/catalogo/[slug]` — ficha de producto, con botón "Comprar por WhatsApp"
   que abre WhatsApp con un mensaje pre-armado (nombre y precio del
   producto).

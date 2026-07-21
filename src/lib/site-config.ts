@@ -1,17 +1,16 @@
 // Configuración central de la marca.
-// Todo lo que lleva TODO acá es un placeholder: cuando se defina el nombre,
-// el logo y los datos reales de contacto, se actualiza solo en este archivo
+// Todo lo que lleva TODO acá es un placeholder: cuando se confirmen los
+// datos reales de contacto y logística, se actualiza solo en este archivo
 // y se propaga a todo el sitio.
 export const siteConfig = {
-  // TODO: reemplazar por el nombre definitivo de la marca.
-  brandName: "Nombre de Marca",
-  tagline: "Ropa y sneakers originales en Uruguay",
+  brandName: "Lulucha",
+  tagline: "Streetwear y championes originales en Uruguay",
   description:
-    "Vendemos ropa y calzado originales de marcas como Nike, Adidas y Jordan, con envíos a todo Uruguay.",
+    "Ropa y championes traídos directo desde Chile: buzos, camperas, accesorios y sneakers, con envíos a todo Uruguay.",
   // TODO: reemplazar por el número real de WhatsApp del negocio (formato internacional, sin '+' ni espacios).
   whatsappNumber: "59899123456",
   // TODO: reemplazar por el usuario real de Instagram.
-  instagramHandle: "nombredemarca",
+  instagramHandle: "lulucha",
   city: "Montevideo, Uruguay",
   currency: "UYU",
   locale: "es-UY",
@@ -19,6 +18,15 @@ export const siteConfig = {
   siteUrl: "https://tu-dominio.com",
   // TODO: reemplazar por el email real de contacto del negocio.
   contactEmail: "hola@tu-dominio.com",
+  // TODO: confirmar si esto es real (local de retiro) o solo un dato de prueba.
+  hasLocalPickup: false,
+  pickupLocation: "Pocitos, Montevideo",
+  // Mensajes del banner superior. Se muestran en loop.
+  announcements: [
+    "Envíos a todo Uruguay en 3-7 días hábiles",
+    "Ropa y championes traídos directo desde Chile",
+    "Cambios dentro de los 7 días con etiqueta puesta",
+  ],
 };
 
 export function formatPrice(amount: number) {

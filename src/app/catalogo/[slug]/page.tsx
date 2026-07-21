@@ -40,10 +40,17 @@ export default async function ProductPage({
       <ProductImagePlaceholder product={product} className="rounded-2xl" />
       <div className="flex flex-col gap-4">
         <span className="text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-          {product.brand}
+          {product.category} · {product.gender}
         </span>
         <h1 className="text-3xl font-bold tracking-tight">{product.name}</h1>
-        <p className="text-2xl font-semibold">{formatPrice(product.price)}</p>
+        <p className="flex items-center gap-3 text-2xl font-semibold">
+          {formatPrice(product.price)}
+          {product.originalPrice && (
+            <span className="text-lg font-normal text-zinc-400 line-through dark:text-zinc-500">
+              {formatPrice(product.originalPrice)}
+            </span>
+          )}
+        </p>
         <p className="text-zinc-600 dark:text-zinc-400">{product.description}</p>
 
         <div>

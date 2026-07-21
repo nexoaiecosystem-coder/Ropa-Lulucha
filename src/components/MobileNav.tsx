@@ -17,7 +17,7 @@ export function MobileNav({
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-label="Abrir menú"
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/10"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white"
       >
         <span className="sr-only">Menú</span>
         {open ? (
@@ -31,14 +31,14 @@ export function MobileNav({
         )}
       </button>
       {open && (
-        <nav className="absolute inset-x-0 top-full border-b border-black/10 bg-white px-6 py-4 dark:border-white/10 dark:bg-black">
+        <nav className="absolute inset-x-0 top-full border-b border-white/10 bg-brand-dark px-6 py-4">
           <ul className="flex flex-col gap-4 text-sm font-medium">
             {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block text-zinc-600 dark:text-zinc-400"
+                  className="block text-white/70 hover:text-white"
                 >
                   {link.label}
                 </Link>
