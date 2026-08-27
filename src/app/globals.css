@@ -1,32 +1,79 @@
 @import "tailwindcss";
 
 :root {
+  --background: #0a0a0a;
+  --foreground: #f2f1ee;
+  --surface: #151513;
+  --surface-2: #1e1e1b;
+  --border: #2c2c28;
+  --accent: #e8321f;
+  --accent-foreground: #fff5f2;
+  --muted: #8f8b83;
+}
+
+[data-theme="light"] {
   --background: #ffffff;
-  --foreground: #171717;
-  --brand-accent: #e0311b;
-  --brand-dark: #14161c;
-  --brand-dark-soft: #21242e;
+  --foreground: #171512;
+  --surface: #f6f5f2;
+  --surface-2: #ececee;
+  --border: #e1ded6;
+  --accent: #e8321f;
+  --accent-foreground: #fff5f2;
+  --muted: #6b675f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-dark-soft: var(--brand-dark-soft);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.font-display {
+  font-family: var(--font-display), Impact, sans-serif;
+}
+
+.input {
+  @apply w-full border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }

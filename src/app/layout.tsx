@@ -1,36 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { AnnouncementBar } from "@/components/AnnouncementBar";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { siteConfig } from "@/lib/site-config";
+import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodyFont = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const displayFont = Bebas_Neue({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl),
-  title: {
-    default: `${siteConfig.brandName} · ${siteConfig.tagline}`,
-    template: `%s · ${siteConfig.brandName}`,
-  },
-  description: siteConfig.description,
-  openGraph: {
-    title: siteConfig.brandName,
-    description: siteConfig.description,
-    url: siteConfig.siteUrl,
-    siteName: siteConfig.brandName,
-    locale: "es_UY",
-    type: "website",
-  },
+  title: "Lulucha — Streetwear traído de Chile",
+  description:
+    "Ropa y calzado urbano traídos directamente desde Chile, a la venta en Uruguay. Poleras, polerones, pantalones, championes y accesorios streetwear con drops limitados.",
 };
 
 export default function RootLayout({
@@ -41,13 +28,13 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bodyFont.variable} ${displayFont.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
-        <AnnouncementBar />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
