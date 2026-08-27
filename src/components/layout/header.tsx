@@ -19,25 +19,28 @@ export async function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <div className="flex items-center gap-3">
           <MobileNav categories={categories} />
-          <Link href="/" className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
+          <Link
+            href="/"
+            className="font-display text-2xl tracking-wide text-foreground transition-transform duration-200 hover:scale-105 hover:text-accent sm:text-3xl"
+          >
             LULUCHA
           </Link>
         </div>
 
         <nav className="hidden lg:flex items-center gap-5 text-sm font-medium uppercase tracking-wide">
-          <Link href="/tienda" className="hover:text-accent transition-colors">
+          <Link href="/tienda" className="nav-underline hover:text-accent transition-colors">
             Todo
           </Link>
-          <Link href="/tienda?gender=HOMBRE" className="hover:text-accent transition-colors">
+          <Link href="/tienda?gender=HOMBRE" className="nav-underline hover:text-accent transition-colors">
             Hombre
           </Link>
-          <Link href="/tienda?gender=MUJER" className="hover:text-accent transition-colors">
+          <Link href="/tienda?gender=MUJER" className="nav-underline hover:text-accent transition-colors">
             Mujer
           </Link>
-          <Link href="/tienda?bestseller=1" className="hover:text-accent transition-colors">
+          <Link href="/tienda?bestseller=1" className="nav-underline hover:text-accent transition-colors">
             Más Vendidos
           </Link>
-          <Link href="/tienda?drop=nuevo" className="hover:text-accent transition-colors">
+          <Link href="/tienda?drop=nuevo" className="nav-underline hover:text-accent transition-colors">
             Nuevos Drops
           </Link>
           <CategoriesDropdown categories={categories} />

@@ -77,3 +77,44 @@ body {
     animation: none;
   }
 }
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+
+.animate-badge-pulse {
+  animation: badge-pulse 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-badge-pulse {
+    animation: none;
+  }
+}
+
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-underline:hover::after {
+  transform: scaleX(1);
+}

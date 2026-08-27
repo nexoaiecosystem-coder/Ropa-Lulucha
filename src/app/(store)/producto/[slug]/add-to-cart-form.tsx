@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
 import { useCartStore } from "@/lib/cart-store";
 
 type Variant = { id: string; size: string; stock: number };
@@ -23,6 +24,7 @@ export function AddToCartForm({
 }) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [justAdded, setJustAdded] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
 
@@ -35,14 +37,14 @@ export function AddToCartForm({
         <button
           type="button"
           onClick={() => router.push("/guia-de-tallas")}
-          className="text-xs text-muted underline hover:text-accent"
+          className="text-xs text-muted underline transition-colors hover:text-accent"
         >
           Guía de talles
         </button>
       </div>
       <div className="flex flex-wrap gap-2">
         {variants.map((v) => (
-          <button
+          <motion.button
             key={v.id}
             type="button"
             disabled={v.stock === 0}
@@ -50,6 +52,7 @@ export function AddToCartForm({
               setSelectedSize(v.size);
               setError(null);
             }}
+            whileTap={v.stock > 0 ? { scale: 0.9 } : undefined}
             className={`flex h-11 min-w-11 items-center justify-center border px-3 text-sm font-medium transition-colors ${
               v.stock === 0
                 ? "cursor-not-allowed border-border text-muted line-through"
@@ -59,14 +62,28 @@ export function AddToCartForm({
             }`}
           >
             {v.size}
-          </button>
+          </motion.button>
         ))}
       </div>
 
-      {error && <p className="mt-2 text-sm text-accent">{error}</p>}
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mt-2 text-sm text-accent"
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
 
-      <button
+      <motion.button
         type="button"
+        whileTap={{ scale: 0.97 }}
+        animate={justAdded ? { backgroundColor: "#16a34a" } : { backgroundColor: "var(--accent)" }}
+        transition={{ duration: 0.25 }}
         onClick={() => {
           if (!selectedVariant) {
             setError("Elige un talle para continuar.");
@@ -85,11 +102,24 @@ export function AddToCartForm({
             },
             1
           );
+          setJustAdded(true);
+          setTimeout(() => setJustAdded(false), 1200);
         }}
-        className="mt-6 w-full bg-accent py-4 text-sm font-bold uppercase tracking-wide text-accent-foreground hover:opacity-90"
+        className="mt-6 w-full py-4 text-sm font-bold uppercase tracking-wide text-accent-foreground"
       >
-        Añadir al carrito
-      </button>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={justAdded ? "added" : "add"}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+            className="inline-block"
+          >
+            {justAdded ? "Agregado ✓" : "Añadir al carrito"}
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
     </div>
   );
 }
